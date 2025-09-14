@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Aggiungi Libro</title>
+</head>
+<body>
+    <h1>Aggiungi Nuovo Libro</h1>
+    
+    <form th:action="@{/books/add}" method="post">
+        
+        <!-- Sezione Libro -->
+        <fieldset>
+            <legend>Libro</legend>
+            <div th:object="${book}">
+                <div>
+                    <label>Title:</label>
+                    <input type="text" th:field="*{title}" required />
+                </div>
+                
+                <div>
+                    <label>year:</label>
+                    <input type="number" th:field="*{year}" required/>
+                </div>
+            </div>
+        </fieldset>
+        
+        <!-- Sezione Autori -->
+        <fieldset>
+            <legend>Autori</legend>
+            
+            <div th:each="author, stat : ${authors}">
+                <div th:object="${author}">
+                    <h4>Autore</h4>
+                    
+                    <label>Nome:</label>
+                    <input type="text" th:field="*{name}" required />
+                    
+                    <label>Cognome:</label>
+                    <input type="text" th:field="*{surname}" required />
+                    
+                    <!-- Rimuovi solo se non è il primo -->
+                    <button th:if="${stat.index > 0}" type="submit" 
+                            name="rimuoviCampoAutore" th:value="${stat.index}">
+                        Rimuovi
+                    </button>
+                </div>
+            </div>
+            
+            <button type="submit" name="aggiungiCampoAutore">
+                + Aggiungi Autore
+            </button>
+        </fieldset>
+        
+        <!-- Salva -->
+        <button type="submit">Salva Libro</button>
+        <a th:href="@{/}">Annulla</a>
+        
+    </form>
+</body>
+</html>
