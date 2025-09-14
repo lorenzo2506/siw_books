@@ -8,6 +8,9 @@
     	
     	<div th:object="${author}">
     		
+    		<div th:if="${#fields.hasGlobalErrors()}">
+			    <p th:each="err : ${#fields.globalErrors()}" th:text="${err}" style="color: #dc2626; font-weight: 600; margin-bottom: 1rem;">...</p> 
+			</div>
     		
     		<div>
                 <label>Name:</label>
@@ -21,11 +24,13 @@
             
             <div>
                 <label>date of birth:</label>
-                <input type="date" th:field="*{dteOfBirth}" required/>
+                <input type="date" th:field="*{dateOfBirth}" required/>
             </div>
             
-            
     	</div>
+    	
+    	<button type="submit">aggiungi Autore</button>
+        <a th:href="@{/}">Annulla</a>
     </form>
 </body>
 </html>

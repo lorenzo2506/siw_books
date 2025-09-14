@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Libro</title>
+	</head>
+	<body>
+		<div th:object="${book}">
+			<div>
+				<span th:text="'titolo: ' + *{title} "></span>
+			</div>
+			<div>
+				<span th:text="'anno: ' + *{year} "></span>
+			</div>
+			<div>
+				<h1>AUTORI:</h1>
+				<div th:each="author: ${authors}">
+					<a th:href="@{'/author/' + ${author.id}}"> <span th:text="'  -  ' + ${author.name} + ' ' + ${author.surname}"></span></a>
+			</div>
+			</div>
+			
+		</div>
+		
+		<div>
+			<a th:href="@{/books}">torna ai libri</a>
+		</div>
+	</body>
+</html>

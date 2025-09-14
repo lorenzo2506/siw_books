@@ -1,15 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
 	<head>
-		<title>Aggiungi Libro</title>
+		<title>autore</title>
 	</head>
-		
+	<body>
 		<div th:object="${author}">
 			<div>
-				
-				
+				<span th:text="'name: ' + *{name} "></span>
+			</div>
+			<div>
+				<span th:text="'surname: ' + *{surname} "></span>
+			</div>
+			<div>
+				<span th:text="'data di nascita: ' + *{dateOfBirth} "></span>
 			</div>
 		</div>
-	<body>
+		
+		<div>
+			<a th:href="@{/authors}">torna agli autori</a>
+		</div>
 	</body>
 </html>

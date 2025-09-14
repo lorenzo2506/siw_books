@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>autori</title>
+	</head>
+		
+	<body>
+		<div th:if="${#lists.isEmpty(authors)}">
+			<p>non ci sono autori nel sistema</p>
+		</div>
+		<div th:if="${!#lists.isEmpty(authors)}">
+			<div th:each="author: ${authors}">
+				<a th:href="@{'/author/' + ${author.id}}"> <span th:text="${author.name} + ' ' + ${author.surname}"></span>
+				</a>
+			</div>
+		</div>
+		
+		<div>
+			<a th:href="@{/}">torna al menu</a>
+		</div>
+	</body>
+</html>

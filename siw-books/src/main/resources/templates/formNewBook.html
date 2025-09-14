@@ -2,24 +2,103 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Aggiungi Libro</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .field-error {
+            border: 2px solid red;
+        }
+        .author-row {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+            margin-bottom: 10px;
+        }
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .field-group label {
+            margin-bottom: 3px;
+            font-weight: bold;
+        }
+        .field-group input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .author-section {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        fieldset {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+        }
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .add-btn {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <h1>Aggiungi Nuovo Libro</h1>
     
-    <form th:action="@{/books/add}" method="post">
+    <form th:action="@{/books/add}" method="post" th:object="${book}">
+        
+        <!-- Visualizza errori generali -->
+        <div th:if="${#fields.hasGlobalErrors()}" class="error">
+            <ul>
+                <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
+            </ul>
+        </div>
         
         <!-- Sezione Libro -->
         <fieldset>
             <legend>Libro</legend>
-            <div th:object="${book}">
-                <div>
-                    <label>Title:</label>
-                    <input type="text" th:field="*{title}" required />
+            <div>
+                <label>Title:</label>
+                <input type="text" th:field="*{title}" 
+                       th:class="${#fields.hasErrors('title')} ? 'field-error' : ''" required />
+                <div th:if="${#fields.hasErrors('title')}" class="error">
+                    <span th:errors="*{title}"></span>
                 </div>
-                
-                <div>
-                    <label>year:</label>
-                    <input type="number" th:field="*{year}" required/>
+            </div>
+            <br>
+            <div>
+                <label>Year:</label>
+                <input type="number" th:field="*{year}" 
+                       th:class="${#fields.hasErrors('year')} ? 'field-error' : ''" required/>
+                <div th:if="${#fields.hasErrors('year')}" class="error">
+                    <span th:errors="*{year}"></span>
                 </div>
             </div>
         </fieldset>
@@ -28,25 +107,51 @@
         <fieldset>
             <legend>Autori</legend>
             
-            <div th:each="author, stat : ${authors}">
-                <div th:object="${author}">
-                    <h4>Autore</h4>
+            <div th:each="author, stat : *{authors}" class="author-section">
+                <h4>Autore <span th:text="${stat.index + 1}"></span></h4>
+                
+                <!-- Errori per nome -->
+                <div th:if="${#fields.hasErrors('authors[' + stat.index + '].name')}" class="error">
+                    <span th:errors="*{authors[__${stat.index}__].name}"></span>
+                </div>
+                
+                <!-- Errori per cognome -->
+                <div th:if="${#fields.hasErrors('authors[' + stat.index + '].surname')}" class="error">
+                    <span th:errors="*{authors[__${stat.index}__].surname}"></span>
+                </div>
+                
+                <div th:if="${#fields.hasErrors('authors[' + stat.index + '].dateOfBirth')}" class="error">
+                    <span th:errors="*{authors[__${stat.index}__].dateOfBirth}"></span>
+                </div>
+                
+                <div class="author-row">
+                    <div class="field-group">
+                        <label>Nome:</label>
+                        <input type="text" th:field="*{authors[__${stat.index}__].name}" 
+                               th:class="${#fields.hasErrors('authors[' + stat.index + '].name')} ? 'field-error' : ''" required />
+                    </div>
                     
-                    <label>Nome:</label>
-                    <input type="text" th:field="*{name}" required />
+                    <div class="field-group">
+                        <label>Cognome:</label>
+                        <input type="text" th:field="*{authors[__${stat.index}__].surname}" 
+                               th:class="${#fields.hasErrors('authors[' + stat.index + '].surname')} ? 'field-error' : ''" required />
+                    </div>
                     
-                    <label>Cognome:</label>
-                    <input type="text" th:field="*{surname}" required />
+                    <div class="field-group">
+                        <label>data di nascita:</label>
+                        <input type="date" th:field="*{authors[__${stat.index}__].dateOfBirth}" 
+                               th:class="${#fields.hasErrors('authors[' + stat.index + '].dateOfBirth')} ? 'field-error' : ''" required />
+                    </div>
                     
                     <!-- Rimuovi solo se non è il primo -->
-                    <button th:if="${stat.index > 0}" type="submit" 
+                    <button th:if="${stat.index > 0}" type="submit" class="remove-btn"
                             name="rimuoviCampoAutore" th:value="${stat.index}">
                         Rimuovi
                     </button>
                 </div>
             </div>
             
-            <button type="submit" name="aggiungiCampoAutore">
+            <button type="submit" name="aggiungiCampoAutore" class="add-btn">
                 + Aggiungi Autore
             </button>
         </fieldset>

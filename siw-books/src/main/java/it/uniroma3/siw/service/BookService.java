@@ -45,7 +45,7 @@ public class BookService {
 		
 		List<Author> existingAuthors = new ArrayList<>();
 	    for (Author author : authors) {
-	        Author dbAuthor = authorService.getAuthorByNameAndSurname(author);
+	        Author dbAuthor = authorService.getAuthorByNameAndSurnameAndDate(author);
 	        existingAuthors.add(dbAuthor);
 	    }
 	    

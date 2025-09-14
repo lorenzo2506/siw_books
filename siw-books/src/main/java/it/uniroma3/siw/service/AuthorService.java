@@ -37,13 +37,13 @@ public class AuthorService {
 	public boolean existsAuthor(Author a) {
 		if(a.getName()==null || a.getSurname()==null)
 			return false;
-		return this.authorRepo.existsByNameIgnoreCaseAndSurnameIgnoreCase(a.getName(), a.getSurname());
+		return this.authorRepo.existsByNameIgnoreCaseAndSurnameIgnoreCaseAndDateOfBirth(a.getName(), a.getSurname(), a.getDateOfBirth());
 	}
 	
-	public Author getAuthorByNameAndSurname(Author a) {
+	public Author getAuthorByNameAndSurnameAndDate(Author a) {
 		if(a.getName()==null || a.getSurname()==null)
 			throw new IllegalArgumentException("campi nome e cognome vuoti");
-		return this.authorRepo.findByNameIgnoreCaseAndSurnameIgnoreCase(a.getName(), a.getSurname());
+		return this.authorRepo.findByNameIgnoreCaseAndSurnameIgnoreCaseAndDateOfBirth(a.getName(), a.getSurname(), a.getDateOfBirth());
 	
 	}
 	

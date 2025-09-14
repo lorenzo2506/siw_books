@@ -1,9 +1,6 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		
-		
-		
-		
+		<title> home page</title>
 	</head>
 
 	<body>
@@ -11,6 +8,8 @@
 		
 		<a th:href="@{/authors}">lista autori</a>
 		<a th:href="@{/books}">lista libri</a>
+		<a th:href="@{/books/add}">aggiungi libro</a>
+		<a th:href="@{/authors/add}">aggiungi autore</a>
 		<a th:href="@{/}"> home</a>
 		
 	
