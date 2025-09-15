@@ -38,6 +38,13 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
+        .image-section {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f0f8ff;
+        }
         fieldset {
             margin: 15px 0;
             padding: 15px;
@@ -67,12 +74,28 @@
             background-color: #28a745;
             color: white;
         }
+        .file-input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .file-input input[type="file"] {
+            width: 100%;
+            padding: 5px;
+        }
+        .info-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>Aggiungi Nuovo Libro</h1>
     
-    <form th:action="@{/books/add}" method="post" th:object="${book}">
+    <form th:action="@{/books/add}" method="post" enctype="multipart/form-data" th:object="${book}">
         
         <!-- Visualizza errori generali -->
         <div th:if="${#fields.hasGlobalErrors()}" class="error">
@@ -83,9 +106,9 @@
         
         <!-- Sezione Libro -->
         <fieldset>
-            <legend>Libro</legend>
+            <legend>Informazioni Libro</legend>
             <div>
-                <label>Title:</label>
+                <label>Titolo:</label>
                 <input type="text" th:field="*{title}" 
                        th:class="${#fields.hasErrors('title')} ? 'field-error' : ''" required />
                 <div th:if="${#fields.hasErrors('title')}" class="error">
@@ -94,12 +117,40 @@
             </div>
             <br>
             <div>
-                <label>Year:</label>
+                <label>Anno:</label>
                 <input type="number" th:field="*{year}" 
                        th:class="${#fields.hasErrors('year')} ? 'field-error' : ''" required/>
                 <div th:if="${#fields.hasErrors('year')}" class="error">
                     <span th:errors="*{year}"></span>
                 </div>
+            </div>
+        </fieldset>
+        
+        <!-- Sezione Immagini del Libro -->
+        <fieldset>
+            <legend>Immagini del Libro (Opzionale)</legend>
+            <div class="image-section">
+                <div class="file-input">
+                    <label for="imageFiles">Seleziona fino a 5 immagini:</label>
+                    <input type="file" 
+                           name="imageFiles" 
+                           id="imageFiles" 
+                           multiple 
+                           accept="image/*" />
+                    <div class="info-text">
+                        Formati supportati: JPG, PNG, GIF, WebP<br>
+                        Dimensione massima per immagine: 5MB<br>
+                        Dimensione totale massima: 20MB
+                    </div>
+                </div>
+                
+                <!-- Info senza JavaScript -->
+                <p><strong>Note:</strong></p>
+                <ul>
+                    <li>Puoi selezionare più file tenendo premuto Ctrl (Windows) o Cmd (Mac)</li>
+                    <li>Massimo 5 immagini per libro</li>
+                    <li>Le immagini sono opzionali - puoi salvare il libro senza immagini</li>
+                </ul>
             </div>
         </fieldset>
         
@@ -138,7 +189,7 @@
                     </div>
                     
                     <div class="field-group">
-                        <label>data di nascita:</label>
+                        <label>Data di nascita:</label>
                         <input type="date" th:field="*{authors[__${stat.index}__].dateOfBirth}" 
                                th:class="${#fields.hasErrors('authors[' + stat.index + '].dateOfBirth')} ? 'field-error' : ''" required />
                     </div>

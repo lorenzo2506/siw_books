@@ -1,23 +1,183 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	
-	<head>
-		<title>autore</title>
-	</head>
-	<body>
-		<div th:object="${author}">
-			<div>
-				<span th:text="'name: ' + *{name} "></span>
-			</div>
-			<div>
-				<span th:text="'surname: ' + *{surname} "></span>
-			</div>
-			<div>
-				<span th:text="'data di nascita: ' + *{dateOfBirth} "></span>
-			</div>
-		</div>
-		
-		<div>
-			<a th:href="@{/authors}">torna agli autori</a>
-		</div>
-	</body>
+<head>
+    <title>Autore</title>
+    <style>
+        .author-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .author-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .author-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .author-image {
+            flex: 0 0 200px;
+        }
+        
+        .author-photo {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .no-photo {
+            width: 200px;
+            height: 250px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .author-info {
+            flex: 1;
+        }
+        
+        .author-info h1 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .author-info p {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .books-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .book-link {
+            display: inline-block;
+            margin: 5px 10px 5px 0;
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .book-link:hover {
+            background-color: #1e7e34;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .back-link:hover {
+            background-color: #545b62;
+            text-decoration: none;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .author-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .author-image {
+                flex: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="author-container">
+        <div class="author-header">
+            <h1 th:text="${author.name + ' ' + author.surname}">Nome Autore</h1>
+        </div>
+        
+        <div class="author-content">
+            <!-- Immagine dell'autore -->
+            <div class="author-image">
+                <img th:if="${author.hasImage()}" 
+                     th:src="@{'/images/' + ${author.imagePath}}" 
+                     th:alt="${author.name + ' ' + author.surname}"
+                     class="author-photo" />
+                     
+                <div th:unless="${author.hasImage()}" class="no-photo">
+                    Foto non disponibile
+                </div>
+            </div>
+            
+            <!-- Informazioni dell'autore -->
+            <div class="author-info">
+                <h1 th:text="${author.name + ' ' + author.surname}">Nome Cognome</h1>
+                
+                <p>
+                    <span class="info-label">Nome:</span> 
+                    <span th:text="${author.name}">Nome</span>
+                </p>
+                
+                <p>
+                    <span class="info-label">Cognome:</span> 
+                    <span th:text="${author.surname}">Cognome</span>
+                </p>
+                
+                <p>
+                    <span class="info-label">Data di nascita:</span> 
+                    <span th:text="${#temporals.format(author.dateOfBirth, 'dd/MM/yyyy')}">01/01/1900</span>
+                </p>
+                
+                <p th:if="${author.dateOfDeath != null}">
+                    <span class="info-label">Data di morte:</span> 
+                    <span th:text="${#temporals.format(author.dateOfDeath, 'dd/MM/yyyy')}">01/01/2000</span>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Sezione Libri dell'autore -->
+        <div class="books-section">
+            <h2>Libri dell'autore</h2>
+            <div th:if="${author.books != null and !author.books.isEmpty()}">
+                <a th:each="book : ${author.books}" 
+                   th:href="@{'/book/' + ${book.id}}" 
+                   th:text="${book.title + ' (' + book.year + ')'}"
+                   class="book-link">Titolo Libro (Anno)</a>
+            </div>
+            <p th:if="${author.books == null or author.books.isEmpty()}">
+                Nessun libro pubblicato
+            </p>
+        </div>
+        
+        <!-- Link di ritorno -->
+        <a th:href="@{/authors}" class="back-link">Torna agli Autori</a>
+    </div>
+</body>
 </html>

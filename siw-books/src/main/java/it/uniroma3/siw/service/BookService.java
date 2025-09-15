@@ -21,11 +21,9 @@ public class BookService {
 		return bookRepo.findAll();
 	}
 	
-	
 	public Book getBook(Long id) {
 		return bookRepo.findById(id).get();
 	}
-	
 	
 	public boolean existsBook(Book book) {
 		return bookRepo.existsByTitleAndYear(book.getTitle(), book.getYear());
@@ -41,22 +39,21 @@ public class BookService {
 		if(book == null || authors.isEmpty())
 			throw new IllegalArgumentException("libro vuoto o senza autori");
 		
-		
-		
 		List<Author> existingAuthors = new ArrayList<>();
 	    for (Author author : authors) {
 	        Author dbAuthor = authorService.getAuthorByNameAndSurnameAndDate(author);
 	        existingAuthors.add(dbAuthor);
 	    }
 	    
-	    book.setAuthors(existingAuthors);    
+	    book.setAuthors(existingAuthors);
+	    
+	    // IMPORTANTE: Salva prima il book (che include già le immagini)
 	    this.save(book);
 	    
-	    for (Author author : existingAuthors)
-	        author.getBooks().add(book);	    
-		
-	    
+	    // Poi aggiorna gli autori con la relazione
+	    for (Author author : existingAuthors) {
+	        author.getBooks().add(book);
+	        authorService.save(author);
+	    }
 	}
-	
-	
 }
