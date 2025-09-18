@@ -109,6 +109,17 @@
                             </a>
                         </div>
                     </div>
+                    
+                    <div th:if="${isAuthenticated and userDetails != null and userDetails.role.name() == 'ADMIN'}">
+                     <form method="post" th:action="@{'/admin/book/' + ${book.id} + '/remove'}" >
+                      <button type="submit" 
+	                    style="background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 6px; color: white; cursor: pointer; padding: 6px 10px; font-size: 12px; font-weight: bold; transition: all 0.2s; box-shadow: 0 2px 8px rgba(239,68,68,0.3);"
+	                    onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 12px rgba(239,68,68,0.5)';"
+	                    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 8px rgba(239,68,68,0.3)';">
+			                Rimuovi Libro
+			            </button>
+		             </form>
+               </div>
                 </div>
                 
             </div>

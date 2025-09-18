@@ -9,19 +9,18 @@
             
             <!-- Header della pagina -->
             <div class="books-header">
-                <h1 class="books-title">📚 Catalogo Libri</h1>
+                <h1 class="books-title"><img th:src="@{/images/icons/books2-icon.png}" 
+                             style="width: 50px !important; height: 50px !important; vertical-align: middle"> Catalogo Libri</h1>
                 <p class="books-subtitle">Esplora la nostra collezione di oltre 50.000 volumi</p>
             </div>
             
             <!-- Stato vuoto - quando non ci sono libri -->
             <div th:if="${#lists.isEmpty(books)}" class="empty-state">
-                <div class="empty-state-icon">📚</div>
+                <div class="empty-state-icon"><img th:src="@{/images/icons/books2-icon.png}" 
+                             style="width: 50px !important; height: 50px !important;"></div>
                 <h2>Nessun libro trovato</h2>
                 <p>Non ci sono ancora libri nella biblioteca. Torna più tardi o contatta l'amministratore.</p>
-                <a th:href="@{/}" class="btn btn-primary">
-                    <span class="back-icon">🏠</span>
-                    Torna alla Home
-                </a>
+                
             </div>
             
             <!-- Griglia libri - quando ci sono libri -->
@@ -32,8 +31,10 @@
                             <h3 th:text="${book.title}">Titolo del Libro</h3>
                             <div class="book-meta">
                                 <span th:if="${book.year}" class="book-year">
-                                    📅 <span th:text="${book.year}">2023</span>
-                                </span>
+								    <img th:src="@{/images/icons/date.png}" 
+								         style="width: 20px !important; height: 20px !important; vertical-align: middle;">
+								    <span>  </span><span th:text="${' '+book.year}">2023</span>
+								</span>
                             </div>
                         </a>
                     </div>

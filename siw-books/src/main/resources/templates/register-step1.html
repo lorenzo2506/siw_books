@@ -50,7 +50,8 @@
                         <!-- Nome -->
                         <div class="form-group">
                             <label for="name" class="form-label">
-                                <span class="label-icon">👤</span>
+                                <span class="label-icon"><img th:src="@{/images/icons/profile-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 Nome
                             </label>
                             <input type="text" 
@@ -64,7 +65,8 @@
                         <!-- Cognome -->
                         <div class="form-group">
                             <label for="surname" class="form-label">
-                                <span class="label-icon">👤</span>
+                                <span class="label-icon"><img th:src="@{/images/icons/profile-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 Cognome
                             </label>
                             <input type="text" 
@@ -78,7 +80,8 @@
                         <!-- Email -->
                         <div class="form-group">
                             <label for="email" class="form-label">
-                                <span class="label-icon">📧</span>
+                                <span class="label-icon"><img th:src="@{/images/icons/profile-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 Email
                             </label>
                             <input type="email" 
@@ -90,7 +93,7 @@
                             
                             <!-- Errore email esistente -->
                             <div th:if="${emailExists}" class="field-error">
-                                <span class="error-icon">⚠️</span>
+                                <span class="error-icon"></span>
                                 <span th:text="${emailExists}">Questa email è già registrata</span>
                             </div>
                         </div>
@@ -98,7 +101,8 @@
                         <!-- Password -->
                         <div class="form-group">
                             <label for="password" class="form-label">
-                                <span class="label-icon">🔒</span>
+                                <span class="label-icon"><img th:src="@{/images/icons/lock-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 Password
                             </label>
                             <input type="password" 
@@ -108,7 +112,8 @@
                                    placeholder="Crea una password sicura"
                                    required>
                             <div class="form-hint">
-                                <span class="hint-icon">ℹ️</span>
+                                <span class="hint-icon"><img th:src="@{/images/icons/information_source.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 <span class="hint-text">La password deve contenere almeno 8 caratteri</span>
                             </div>
                         </div>
@@ -116,11 +121,13 @@
                         <!-- Azioni -->
                         <div class="form-actions">
                             <button type="submit" class="auth-submit-btn primary">
-                                <span class="btn-icon">➡️</span>
+                                <span class="btn-icon"><img th:src="@{/images/icons/arrow_right.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 <span class="btn-text">Continua</span>
                             </button>
                             <a th:href="@{/login}" class="auth-cancel-btn">
-                                <span class="btn-icon">❌</span>
+                                <span class="btn-icon"><img th:src="@{/images/icons/x.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 <span class="btn-text">Annulla</span>
                             </a>
                         </div>

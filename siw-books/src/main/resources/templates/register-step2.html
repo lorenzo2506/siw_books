@@ -49,7 +49,7 @@
                     <!-- Info Email Confermata -->
                     <div class="info-box">
                         <div class="info-content">
-                            <span class="info-icon">✅</span>
+                            <span class="info-icon"></span>
                             <div class="info-details">
                                 <span class="info-label">Email confermata:</span>
                                 <span class="info-value" th:text="${credentials.email}">email@esempio.com</span>
@@ -59,7 +59,7 @@
                     
                     <!-- Errore generico -->
                     <div th:if="${errorMessage}" class="message-box error-message">
-                        <div class="message-icon">❌</div>
+                        <div class="message-icon"></div>
                         <span th:text="${errorMessage}">Si è verificato un errore</span>
                     </div>
                     
@@ -81,12 +81,13 @@
                             
                             <!-- Errore username esistente -->
                             <div th:if="${usernameExists}" class="field-error">
-                                <span class="error-icon">⚠️</span>
+                                <span class="error-icon"></span>
                                 <span th:text="${usernameExists}">Questo username è già in uso</span>
                             </div>
                             
                             <div class="form-hint">
-                                <span class="hint-icon">ℹ️</span>
+                                <span class="hint-icon"><img th:src="@{/images/icons/information_source.png}" 
+                             style="width: 26px !important; height: 20px !important;"></span>
                                 <span class="hint-text">
                                     L'username deve essere univoco e può contenere lettere, numeri e underscore
                                 </span>
@@ -96,11 +97,13 @@
                         <!-- Azioni -->
                         <div class="form-actions">
                             <button type="submit" class="auth-submit-btn success">
-                                <span class="btn-icon">✓</span>
+                                <span class="btn-icon"><img th:src="@{/images/icons/heavy_check_mark.png}" 
+                             style="width: 26px !important; height: 20px !important;"></span>
                                 <span class="btn-text">Completa Registrazione</span>
                             </button>
                             <a th:href="@{/register/cancel}" class="auth-cancel-btn">
-                                <span class="btn-icon">❌</span>
+                                <span class="btn-icon"><img th:src="@{/images/icons/x.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 <span class="btn-text">Annulla</span>
                             </a>
                         </div>

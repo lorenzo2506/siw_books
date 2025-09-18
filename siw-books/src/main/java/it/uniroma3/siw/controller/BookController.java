@@ -26,9 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Author;
 import it.uniroma3.siw.model.Book;
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.service.AuthorService;
 import it.uniroma3.siw.service.BookService;
 import it.uniroma3.siw.service.ImageStorageService;
+import it.uniroma3.siw.validator.AdminValidator;
 import it.uniroma3.siw.validator.BookValidator;
 import jakarta.validation.Valid;
 
@@ -39,6 +41,7 @@ public class BookController {
 	@Autowired private AuthorService authorService;
 	@Autowired private BookValidator bookValidator;
 	@Autowired private ImageStorageService imageStorageService;
+	@Autowired private AdminValidator adminValidator;
 	
 	@Value("${app.image.upload.dir:uploads/images}")
 	private String uploadDir;
@@ -199,5 +202,20 @@ public class BookController {
 	        bindingResult.rejectValue("title", "error.book.images", "Errore nel caricamento immagini: " + e.getMessage());
 	        return "admin/formNewBook.html";
 	    }
+	}
+	
+	@PostMapping("/admin/book/{id}/remove")
+	public String removeBook(@Valid @ModelAttribute("Credentials") Credentials credentials, BindingResult bindingResult, @PathVariable("id") Long id, Model model) {
+		
+		this.adminValidator.validate(credentials, bindingResult);
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("book", this.bookService.getBook(id));
+			model.addAttribute("authors", this.bookService.getBook(id).getAuthors());
+			return "book.html";
+		}
+		
+		this.bookService.deleteBook(id);
+		
+		return "redirect:/books";
 	}
 }

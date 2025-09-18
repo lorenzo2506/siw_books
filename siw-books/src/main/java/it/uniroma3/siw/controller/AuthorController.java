@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Author;
+import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.service.AuthenticationService;
 import it.uniroma3.siw.service.AuthorService;
 import it.uniroma3.siw.service.ImageStorageService;
+import it.uniroma3.siw.validator.AdminValidator;
 import it.uniroma3.siw.validator.AuthorValidator;
 import jakarta.validation.Valid;
 
@@ -25,6 +28,8 @@ public class AuthorController {
 	@Autowired private AuthorService authorService;
 	@Autowired private AuthorValidator authorValidator;
 	@Autowired private ImageStorageService imageStorageService;
+	@Autowired private AdminValidator adminValidator;
+	
 	
 	@GetMapping("/authors")
 	public String showAuthors(Model model) {
@@ -86,5 +91,22 @@ public class AuthorController {
 				"Errore nel caricamento immagine: " + e.getMessage());
 			return "admin/formNewAuthor.html";
 		}
+	}
+	
+	
+	
+	@PostMapping("/admin/author/{id}/remove")
+	public String removeAuthor(@Valid @ModelAttribute("Credentials") Credentials currentCredentials, BindingResult bindingResult, @PathVariable("id") Long id, Model model) {
+		
+		this.adminValidator.validate(currentCredentials, bindingResult);
+		
+		if(bindingResult.hasErrors()) {
+			Author author = this.authorService.getAuthor(id);
+	        model.addAttribute("author", author);
+			return "author.html";
+		}
+		
+		this.authorService.removeAuthor(id);
+		return "redirect:/authors";
 	}
 }

@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 import it.uniroma3.siw.model.Author;
 import it.uniroma3.siw.model.Book;
 import it.uniroma3.siw.repository.AuthorRepository;
+import it.uniroma3.siw.repository.BookRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class AuthorService {
 
 	
 	@Autowired private AuthorRepository authorRepo;
+	@Autowired private BookRepository bookRepo;
 	
 	public List<Author> getAllAuthor() {
 		return authorRepo.findAll();
@@ -62,5 +65,34 @@ public class AuthorService {
 			author.getBooks().add(book);
 			this.save(author);
 		}
+	}
+	
+	public void delete(Author a) {
+		this.authorRepo.delete(a);
+	}
+	
+	@Transactional
+	public void removeAuthor(Long id) {
+		
+		if(id==null)
+			throw new IllegalArgumentException("id nullo");
+		
+		Author author = this.getAuthor(id);
+		if(author==null)
+			throw new IllegalArgumentException("id non corrisponde a nessu autore nel sistema");
+		
+		
+		for(Book book: author.getBooks()) {
+			book.getAuthors().remove(author);
+			
+			if(book.getAuthors().size()==0)
+				this.bookRepo.delete(book);
+			else
+				this.bookRepo.save(book);
+		}
+		
+		this.delete(author);
+		
+		
 	}
 }

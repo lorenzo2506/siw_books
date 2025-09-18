@@ -13,7 +13,8 @@
                     <!-- Header -->
                     <div class="auth-header">
                         <div class="auth-icon">
-                            📚
+                            <img th:src="@{/images/icons/books2-icon.png}" 
+                             style="width: 80px !important; height: 80px !important;">
                         </div>
                         <h1 class="auth-title">
                             Accedi alla Biblioteca
@@ -42,7 +43,8 @@
                     <!-- OAuth2 Google Login -->
                     <div class="oauth-section">
                         <a th:href="@{/oauth2/authorization/google}" class="oauth-button google-button">
-                            <span class="oauth-icon">🔗</span>
+                            <span class="oauth-icon"><img th:src="@{/images/icons/link-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                             <span class="oauth-text">Continua con Google</span>
                         </a>
                     </div>
@@ -60,7 +62,8 @@
                         <!-- Username/Email -->
                         <div class="form-group">
                             <label for="username" class="form-label">
-                                <span class="label-icon">👤</span>
+                                <span class="label-icon"> <img th:src="@{/images/icons/profile-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                                 Username o Email
                             </label>
                             <input type="text" 
@@ -74,7 +77,8 @@
                         <!-- Password -->
                         <div class="form-group">
                             <label for="password" class="form-label">
-                                <span class="label-icon">🔒</span>
+                                <span class="label-icon"><span class="label-icon"> <img th:src="@{/images/icons/lock-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span></span>
                                 Password
                             </label>
                             <input type="password" 
@@ -87,7 +91,7 @@
                         
                         <!-- Submit Button -->
                         <button type="submit" class="auth-submit-btn">
-                            <span class="btn-icon">🚪</span>
+                            <span class="btn-icon"></span>
                             <span class="btn-text">Accedi</span>
                         </button>
                     </form>
@@ -103,7 +107,8 @@
                     <div class="auth-footer">
                         <p class="footer-text">Non hai ancora un account?</p>
                         <a th:href="@{/register}" class="register-link">
-                            <span class="link-icon">📝</span>
+                            <span class="link-icon"><img th:src="@{/images/icons/task-icon.png}" 
+                             style="width: 20px !important; height: 20px !important;"></span>
                             <span class="link-text">Registrati qui</span>
                         </a>
                     </div>

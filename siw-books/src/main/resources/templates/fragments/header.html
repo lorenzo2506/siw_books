@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <!-- Header Fragment - Biblioteca Storica SEMPLICE -->
+    <!-- Header Fragment - Biblioteca Storica OTTIMIZZATO -->
     <header th:fragment="intestazione" class="biblioteca-header">
         
         <!-- Main header -->
@@ -9,21 +9,25 @@
             <div class="container">
                 <div class="header-content">
                     
-                    <!-- Logo con icona ridimensionata -->
+                    <!-- Logo con icona RIDOTTA e stili inline per sicurezza -->
                     <div th:if="${!isAuthenticated or isUser}" class="logo-section">
                         <a th:href="@{/}" class="logo-link">
-                            <img th:src="@{/images/icons/pantheon-icon.png}" class="logo-icon">
+                            <img th:src="@{/images/icons/pantheon-icon.png}" 
+                                 class="logo-icon" 
+                                 style="width: 40px !important; height: 40px !important; flex-shrink: 0;">
                             <div class="logo-text">
-                                <h1>Wikibooks</h1>
+                                <h1 style="font-size: 2rem !important; margin: 0; line-height: 0.2;">Wikibooks</h1>
                             </div>
                         </a>
                     </div>
                     
                     <div th:if="${isAdmin}" class="logo-section">
                         <a th:href="@{/admin}" class="logo-link">
-                            <img th:src="@{/images/icons/pantheon-icon.png}" class="logo-icon">
+                            <img th:src="@{/images/icons/pantheon-icon.png}" 
+                                 class="logo-icon"
+                                 style="width: 40px !important; height: 40px !important; flex-shrink: 0;">
                             <div class="logo-text">
-                                <h1>Wikibooks</h1>
+                                <h1 style="font-size: 2rem !important; margin: 0; line-height: 0.2;">Wikibooks</h1>
                             </div>
                         </a>
                     </div>
@@ -46,28 +50,38 @@
             </div>
         </div>
         
-        <!-- Navigation Menu (SENZA aggiungi libro/autore) -->
+        <!-- Navigation Menu -->
         <nav class="main-nav">
             <div class="container">
                 <div class="nav-menu">
                     <a th:if="${isUser or !isAuthenticated}" th:href="@{/}" class="nav-link">
-                        <img th:src="@{/images/icons/home-icon.png}" class="nav-icon">
+                        <img th:src="@{/images/icons/home-icon.png}" 
+                             class="nav-icon"
+                             style="width: 32px !important; height: 32px !important; vertical-align: middle;">
                         <span>home</span>
                     </a>
                     <a th:if="${isAdmin}" th:href="@{/admin}" class="nav-link">
-                        <img th:src="@{/images/icons/home-icon.png}" class="nav-icon">
+                        <img th:src="@{/images/icons/home-icon.png}" 
+                             class="nav-icon"
+                             style="width: 32px !important; height: 32px !important; vertical-align: middle;">
                         <span>home</span>
                     </a>
                     <a th:href="@{/books}" class="nav-link">
-                        <img th:src="@{/images/icons/book-icon.webp}" class="nav-icon">
+                        <img th:src="@{/images/icons/book-icon.webp}" 
+                             class="nav-icon"
+                             style="width: 32px !important; height: 32px !important;">
                         <span>libri</span>
                     </a>
                     <a th:href="@{/authors}" class="nav-link">
-                        <img th:src="@{/images/icons/authors-icon.png}" class="nav-icon">
+                        <img th:src="@{/images/icons/authors-icon.png}" 
+                             class="nav-icon"
+                             style="width: 32px !important; height: 32px !important;">
                         <span>autori</span>
                     </a>
                     <a th:href="@{/profile}" class="nav-link">
-                        <img th:src="@{/images/icons/profile2-icon.png}" class="nav-icon">
+                        <img th:src="@{/images/icons/profile2-icon.png}" 
+                             class="nav-icon"
+                             style="width: 32px !important; height: 32px !important;">
                         <span>profilo</span>
                     </a>
                 </div>

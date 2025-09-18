@@ -3,19 +3,18 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
-/* Import dei file CSS specifici */
-@import url('base.css');
-@import url('homepage.css');
+/* ORDINE CORRETTO - Prima variabili, poi base, poi specifici */
 @import url('variables.css');
-@import url('header.css');
+@import url('base.css');
 @import url('components.css');
+@import url('header.css');
+@import url('forms.css');
 @import url('books.css');
 @import url('authors.css');
-@import url('forms.css');
 @import url('userProfile.css');
 @import url('auth.css');
-
-
+/* Homepage ULTIMO per avere priorità massima */
+@import url('homepage.css');
 
 /* Reset base */
 * {
@@ -29,4 +28,22 @@ body {
     background: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+}
+
+/* OVERRIDE SPECIFICI PER ADMIN - Priorità massima */
+.admin-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    gap: 40px !important;
+    margin-bottom: 50px !important;
+    flex-wrap: nowrap !important;
+}
+
+.action-card {
+    width: 320px !important;
+    max-width: 320px !important;
+    min-width: 320px !important;
+    flex: 0 0 320px !important;
 }

@@ -16,12 +16,19 @@ public class BookService {
 
 	@Autowired private BookRepository bookRepo;
 	@Autowired private AuthorService authorService;
+	@Autowired private AuthenticationService authService;
 	
 	public List<Book> getAllBooks() {
 		return bookRepo.findAll();
 	}
 	
+	public void delete(Book book) {
+		this.bookRepo.delete(book);
+	}
+	
 	public Book getBook(Long id) {
+		if(id==null)
+			return null;
 		return bookRepo.findById(id).get();
 	}
 	
@@ -55,5 +62,21 @@ public class BookService {
 	        author.getBooks().add(book);
 	        authorService.save(author);
 	    }
+	}
+	
+	
+	
+	public void deleteBook(Long id) {
+		
+		if(id==null || this.getBook(id)==null)
+			throw new IllegalArgumentException("id nullo oppure nessun libro nel sistema che ha quell id");
+		
+		Book book = this.getBook(id);
+		for(Author author : book.getAuthors() ) {
+			author.getBooks().remove(book);
+			this.authorService.save(author);
+		}
+		
+		this.delete(book);
 	}
 }

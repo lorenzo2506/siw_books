@@ -40,7 +40,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/", "/index", "/login", "/register", "/register/**", 
-                               "/css/**", "/images/**", "/authors", "/author/**", "/books", "/book/**").permitAll()
+                               "/css/**", "/images/**", "/authors/**", "/author/**", "/books", "/book/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
