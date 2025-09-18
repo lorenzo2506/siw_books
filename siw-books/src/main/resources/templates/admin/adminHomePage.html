@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Pannello Amministratore</title>
+</head>
+<body>
+    <main>
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1 class="admin-title">Pannello Amministratore</h1>
+                <p class="admin-subtitle">Gestisci la biblioteca digitale</p>
+            </div>
+
+            <!-- Riquadri di azione orizzontali -->
+            <div class="admin-actions">
+                <div class="action-card book-card">
+                    <a th:href="@{/admin/books/add}" class="card-link">
+                        <span class="action-icon">📚</span>
+                        <span class="action-title">Aggiungi Libro</span>
+                        <span class="action-description">Inserisci un nuovo libro nel catalogo della biblioteca</span>
+                    </a>
+                </div>
+
+                <div class="action-card author-card">
+                    <a th:href="@{/admin/authors/add}" class="card-link">
+                        <span class="action-icon">👤</span>
+                        <span class="action-title">Aggiungi Autore</span>
+                        <span class="action-description">Registra un nuovo autore nel database della biblioteca</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Statistiche opzionali -->
+            <div class="admin-stats">
+                <div class="admin-stat-item">
+                    <div class="admin-stat-number">52,847</div>
+                    <div class="admin-stat-label">Libri totali</div>
+                </div>
+                <div class="admin-stat-item">
+                    <div class="admin-stat-number">8,234</div>
+                    <div class="admin-stat-label">Autori registarati</div>
+                </div>
+                <div class="admin-stat-item">
+                    <div class="admin-stat-number">15,692</div>
+                    <div class="admin-stat-label">Recensioni</div>
+                </div>
+                <div class="admin-stat-item">
+                    <div class="admin-stat-number">1,249</div>
+                    <div class="admin-stat-label">Utenti attivi</div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

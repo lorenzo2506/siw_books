@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Accedi - Biblioteca Storica</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+    <main>
+        <section class="auth-container">
+            <div class="auth-wrapper">
+                <div class="auth-card">
+                    
+                    <!-- Header -->
+                    <div class="auth-header">
+                        <div class="auth-icon">
+                            📚
+                        </div>
+                        <h1 class="auth-title">
+                            Accedi alla Biblioteca
+                        </h1>
+                        <p class="auth-subtitle">
+                            Benvenuto nella tua biblioteca digitale
+                        </p>
+                    </div>
+                    
+                    <!-- Messaggi di stato -->
+                    <div th:if="${registrationSuccess}" class="message-box success-message">
+                        <div class="message-icon">✅</div>
+                        <span th:text="${registrationSuccess}">Registrazione completata con successo!</span>
+                    </div>
+                    
+                    <div th:if="${errorMessage}" class="message-box error-message">
+                        <div class="message-icon">❌</div>
+                        <span th:text="${errorMessage}">Errore durante l'accesso</span>
+                    </div>
+                    
+                    <div th:if="${logoutMessage}" class="message-box info-message">
+                        <div class="message-icon">ℹ️</div>
+                        <span th:text="${logoutMessage}">Disconnessione avvenuta con successo</span>
+                    </div>
+                    
+                    <!-- OAuth2 Google Login -->
+                    <div class="oauth-section">
+                        <a th:href="@{/oauth2/authorization/google}" class="oauth-button google-button">
+                            <span class="oauth-icon">🔗</span>
+                            <span class="oauth-text">Continua con Google</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Separatore -->
+                    <div class="separator">
+                        <div class="separator-line"></div>
+                        <span class="separator-text">oppure</span>
+                        <div class="separator-line"></div>
+                    </div>
+                    
+                    <!-- Form di Login Tradizionale -->
+                    <form th:action="@{/login}" method="post" class="auth-form">
+                        
+                        <!-- Username/Email -->
+                        <div class="form-group">
+                            <label for="username" class="form-label">
+                                <span class="label-icon">👤</span>
+                                Username o Email
+                            </label>
+                            <input type="text" 
+                                   name="username" 
+                                   id="username" 
+                                   class="form-input" 
+                                   placeholder="Inserisci username o email"
+                                   required>
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                <span class="label-icon">🔒</span>
+                                Password
+                            </label>
+                            <input type="password" 
+                                   name="password" 
+                                   id="password" 
+                                   class="form-input" 
+                                   placeholder="Inserisci la tua password"
+                                   required>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" class="auth-submit-btn">
+                            <span class="btn-icon">🚪</span>
+                            <span class="btn-text">Accedi</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Separatore -->
+                    <div class="separator">
+                        <div class="separator-line"></div>
+                        <span class="separator-text">oppure</span>
+                        <div class="separator-line"></div>
+                    </div>
+                    
+                    <!-- Link Registrazione -->
+                    <div class="auth-footer">
+                        <p class="footer-text">Non hai ancora un account?</p>
+                        <a th:href="@{/register}" class="register-link">
+                            <span class="link-icon">📝</span>
+                            <span class="link-text">Registrati qui</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

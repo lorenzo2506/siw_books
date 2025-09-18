@@ -12,7 +12,7 @@
 	<artifactId>siw-books</artifactId>
 	<version>1.0</version>
 	<name>siw-books</name>
-	<description>siw movie</description>
+	<description>siw books </description>
 	<url/>
 	<licenses>
 		<license/>
@@ -55,6 +55,11 @@
 		</dependency>
 		
 		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
 		    <groupId>jakarta.validation</groupId>
 		    <artifactId>jakarta.validation-api</artifactId>
 		    <version>3.0.2</version>
@@ -66,7 +71,11 @@
 		</dependency>
 		
 		
-		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+
 		
 		
 		<dependency>

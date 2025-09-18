@@ -1,18 +1,54 @@
-<html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title> home page</title>
-	</head>
-
-	<body>
-		
-		
-		<a th:href="@{/authors}">lista autori</a>
-		<a th:href="@{/books}">lista libri</a>
-		<a th:href="@{/books/add}">aggiungi libro</a>
-		<a th:href="@{/authors/add}">aggiungi autore</a>
-		<a th:href="@{/}"> home</a>
-		
-	
-	
-	</body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Biblioteca Storica - Home</title>
+</head>
+<body>
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">Tesori Letterari</h1>
+                        <p class="hero-subtitle">
+                            Dalle opere classiche alle pubblicazioni contemporanee.<br>
+                            Oltre 50.000 volumi in una delle biblioteche più antiche d'Italia.
+                        </p>
+                        <div class="hero-actions">
+                            <a th:href="@{/books}" class="btn btn-primary">
+                                Esplora il Catalogo
+                            </a>
+                            <a th:href="@{/authors}" class="btn btn-secondary">
+                                Scopri gli Autori
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">📚</div>
+                            <div class="stat-number">52,847</div>
+                            <div class="stat-label">Volumi</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">✍️</div>
+                            <div class="stat-number">8,234</div>
+                            <div class="stat-label">Autori</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-number">15,692</div>
+                            <div class="stat-label">Recensioni</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+      
+        
+        
+    </main>
+</body>
 </html>

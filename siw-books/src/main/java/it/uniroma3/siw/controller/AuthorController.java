@@ -38,13 +38,13 @@ public class AuthorController {
 		return "author.html";
 	}
 	
-	@GetMapping("/authors/add")
+	@GetMapping("/admin/authors/add")
 	public String showFormNewAuthor(Model model) {
 		model.addAttribute("author", new Author());
-		return "formNewAuthor.html";
+		return "admin/formNewAuthor.html";
 	}
 	
-	@PostMapping("/authors/add")
+	@PostMapping("/admin/authors/add")
 	public String addAuthor(@Valid @ModelAttribute("author") Author author, 
 	                       BindingResult bindingResult,
 	                       @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
@@ -68,7 +68,7 @@ public class AuthorController {
 		}
 		
 		if(bindingResult.hasErrors()) {
-			return "formNewAuthor.html";
+			return "admin/formNewAuthor.html";
 		}
 		
 		try {
@@ -84,7 +84,7 @@ public class AuthorController {
 		} catch (IOException e) {
 			bindingResult.rejectValue("name", "error.author.image", 
 				"Errore nel caricamento immagine: " + e.getMessage());
-			return "formNewAuthor.html";
+			return "admin/formNewAuthor.html";
 		}
 	}
 }

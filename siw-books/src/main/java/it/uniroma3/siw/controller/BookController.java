@@ -83,7 +83,7 @@ public class BookController {
 		return "book.html";
 	}
 	
-	@GetMapping("/books/add")
+	@GetMapping("/admin/books/add")
 	public String showFormNewBook(Model model) {
 		Book book = new Book();
 		// Inizializza la lista di autori direttamente nel book
@@ -92,10 +92,10 @@ public class BookController {
 		book.setAuthors(authors);
 		
 		model.addAttribute("book", book);
-		return "formNewBook.html";
+		return "admin/formNewBook.html";
 	}
 	
-	@PostMapping("/books/add")
+	@PostMapping("/admin/books/add")
 	public String addBook(@Valid @ModelAttribute("book") Book book, 
 	                     BindingResult bindingResult, 
 	                     @RequestParam(required = false) String aggiungiCampoAutore,
@@ -121,7 +121,7 @@ public class BookController {
 	    if (aggiungiCampoAutore != null) {
 	        authors.add(new Author());
 	        model.addAttribute("book", book);
-	        return "formNewBook.html";
+	        return "admin/formNewBook.html";
 	    }
 	    
 	    // Gestione rimozione autore
@@ -131,7 +131,7 @@ public class BookController {
 	            authors.remove(index);
 	        }
 	        model.addAttribute("book", book);
-	        return "formNewBook.html";
+	        return "admin/formNewBook.html";
 	    }
 	    
 	    // Validazione immagini
@@ -161,7 +161,7 @@ public class BookController {
 	    
 	    // Controllo errori di binding
 	    if(bindingResult.hasErrors()) {    
-	        return "formNewBook.html";
+	        return "admin/formNewBook.html";
 	    }
 	    
 	    // Validazione autori
@@ -181,7 +181,7 @@ public class BookController {
 	    }
 	    
 	    if (bindingResult.hasErrors()) {
-	        return "formNewBook.html";
+	        return "admin/formNewBook.html";
 	    }
 	    
 	    try {
@@ -197,7 +197,7 @@ public class BookController {
 	        
 	    } catch (IOException e) {
 	        bindingResult.rejectValue("title", "error.book.images", "Errore nel caricamento immagini: " + e.getMessage());
-	        return "formNewBook.html";
+	        return "admin/formNewBook.html";
 	    }
 	}
 }

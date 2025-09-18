@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Aggiungi Libro - Biblioteca Storica</title>
+</head>
+<body>
+    <main class="form-page">
+        <div class="container">
+            <div class="form-container">
+                
+                <div class="form-header">
+                    <h1>Aggiungi Nuovo Libro</h1>
+                    <p>Inserisci un nuovo libro nella collezione della biblioteca</p>
+                </div>
+                
+                <form th:action="@{/admin/books/add}" method="post" enctype="multipart/form-data" th:object="${book}" class="elegant-form">
+                    
+                    <!-- Errori generali -->
+                    <div th:if="${#fields.hasGlobalErrors()}" class="error-section">
+                        <div class="error-icon">⚠️</div>
+                        <ul class="error-list">
+                            <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Informazioni libro -->
+                    <fieldset class="form-section">
+                        <legend>Informazioni del Libro</legend>
+                        
+                        <div class="form-row">
+                            <div class="form-group form-group-wide">
+                                <label for="title">Titolo *</label>
+                                <input type="text" th:field="*{title}" id="title" 
+                                       th:class="${#fields.hasErrors('title')} ? 'field-error' : ''" 
+                                       placeholder="Es. I Promessi Sposi" required />
+                                <div th:if="${#fields.hasErrors('title')}" class="field-error-message">
+                                    <span th:errors="*{title}"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="year">Anno di pubblicazione *</label>
+                                <input type="number" th:field="*{year}" id="year" 
+                                       th:class="${#fields.hasErrors('year')} ? 'field-error' : ''" 
+                                       placeholder="Es. 1827" min="1" max="2025" required />
+                                <div th:if="${#fields.hasErrors('year')}" class="field-error-message">
+                                    <span th:errors="*{year}"></span>
+                                </div>
+                                <small class="field-hint">Anno della prima pubblicazione</small>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <!-- Sezione Autori -->
+                    <fieldset class="form-section">
+                        <legend>Autori del Libro</legend>
+                        
+                        <div class="authors-container">
+                            <div th:each="author, stat : *{authors}" class="author-card">
+                                <div class="author-card-header">
+                                    <h4 class="author-title">Autore <span th:text="${stat.index + 1}">1</span></h4>
+                                    <button th:if="${stat.index > 0}" type="submit" class="btn-remove"
+                                            name="rimuoviCampoAutore" th:value="${stat.index}"
+                                            title="Rimuovi questo autore">
+                                        <span class="btn-icon">🗑️</span>
+                                    </button>
+                                </div>
+                                
+                                <!-- Errori autore -->
+                                <div class="author-errors">
+                                    <div th:if="${#fields.hasErrors('authors[' + stat.index + '].name')}" class="field-error-message">
+                                        <span th:errors="*{authors[__${stat.index}__].name}"></span>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('authors[' + stat.index + '].surname')}" class="field-error-message">
+                                        <span th:errors="*{authors[__${stat.index}__].surname}"></span>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('authors[' + stat.index + '].dateOfBirth')}" class="field-error-message">
+                                        <span th:errors="*{authors[__${stat.index}__].dateOfBirth}"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="author-fields">
+                                    <div class="form-group">
+                                        <label th:for="'author-name-' + ${stat.index}">Nome *</label>
+                                        <input type="text" th:field="*{authors[__${stat.index}__].name}" 
+                                               th:id="'author-name-' + ${stat.index}"
+                                               th:class="${#fields.hasErrors('authors[' + stat.index + '].name')} ? 'field-error' : ''" 
+                                               placeholder="Es. Alessandro" required />
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label th:for="'author-surname-' + ${stat.index}">Cognome *</label>
+                                        <input type="text" th:field="*{authors[__${stat.index}__].surname}" 
+                                               th:id="'author-surname-' + ${stat.index}"
+                                               th:class="${#fields.hasErrors('authors[' + stat.index + '].surname')} ? 'field-error' : ''" 
+                                               placeholder="Es. Manzoni" required />
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label th:for="'author-birth-' + ${stat.index}">Data di nascita *</label>
+                                        <input type="date" th:field="*{authors[__${stat.index}__].dateOfBirth}" 
+                                               th:id="'author-birth-' + ${stat.index}"
+                                               th:class="${#fields.hasErrors('authors[' + stat.index + '].dateOfBirth')} ? 'field-error' : ''" 
+                                               required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="add-author-section">
+                            <button type="submit" name="aggiungiCampoAutore" class="btn btn-add">
+                                <span class="btn-icon">➕</span>
+                                Aggiungi Altro Autore
+                            </button>
+                            <small class="field-hint">Puoi aggiungere più autori se il libro è stato scritto in collaborazione</small>
+                        </div>
+                    </fieldset>
+                    
+                    <!-- Sezione Immagini -->
+                    <fieldset class="form-section">
+                        <legend>Immagini del Libro (Opzionale)</legend>
+                        <div class="images-upload-section">
+                            <div class="upload-area-multiple">
+                                <label for="imageFiles">Clicca per selezionare fino a 5 immagini</label>
+                                <input type="file" 
+                                       name="imageFiles" 
+                                       id="imageFiles" 
+                                       multiple 
+                                       accept="image/*" />
+                                       
+                                <div class="upload-info">
+                                    <small>Formati supportati: JPG, PNG, GIF, WebP</small>
+                                    <small>Dimensione massima per immagine: 5MB</small>
+                                    <small>Dimensione totale massima: 20MB</small>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                                
+                                <div class="upload-notes">
+                                    <p><strong>Suggerimenti:</strong></p>
+                                    <ul>
+                                        <li>Carica la copertina come prima immagine</li>
+                                        <li>Aggiungi foto del dorso, controcopertina, o pagine significative</li>
+                                        <li>Le immagini aiutano i lettori a identificare il libro</li>
+                                        <li>Puoi salvare il libro anche senza immagini</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <!-- Azioni -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-icon">📚</span>
+                            Salva Libro
+                        </button>
+                        <a th:href="@{/books}" class="btn btn-secondary">
+                            <span class="btn-icon">✕</span>
+                            Annulla
+                        </a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Il mio Profilo - Biblioteca Storica</title>
+    <link rel="stylesheet" th:href="@{/css/userProfile.css}">
+</head>
+<body>
+    <main>
+        <div class="profile-container">
+            <!-- Profile Header -->
+            <section class="profile-header">
+                <div class="container">
+                    <div class="profile-card">
+                        <!-- Avatar -->
+                        <div class="profile-avatar">
+                            <div class="avatar-circle">
+                                <span class="avatar-icon">👤</span>
+                            </div>
+                        </div>
+                        
+                        <!-- User Info -->
+                        <div class="profile-info">
+                            <h1 class="profile-name">
+                                <span th:if="${currentUser != null}" 
+                                      th:text="${currentUser.name + ' ' + currentUser.surname}">Marco Rossi</span>
+                                <span th:unless="${currentUser != null}">Utente</span>
+                            </h1>
+                            
+                            <div class="profile-details">
+                                <p class="profile-username">
+                                    <span class="detail-label">USERNAME:</span>
+                                    <span th:text="${userDetails != null ? userDetails.username : 'oauth2_user'}">marco.rossi</span>
+                                </p>
+                                
+                                <p class="profile-email">
+                                    <span class="detail-label">EMAIL 📧:</span>
+                                    <span th:text="${userDetails != null ? userDetails.email : 'email@esempio.com'}">marco.rossi@email.com</span>
+                                </p>
+                                
+                                <div class="profile-badges">
+                                    <span class="badge badge-user" th:if="${isUser}">Lettore</span>
+                                    <span class="badge badge-admin" th:if="${isAdmin}">Amministratore</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            
+            <!-- Logout Section -->
+            <section class="logout-section">
+                <div class="container">
+                    <div class="logout-card">
+                        <form th:action="@{/logout}" method="post" class="logout-form">
+                            <button type="submit" class="logout-button">
+                                <span class="logout-icon">🚪</span>
+                                <span class="logout-text">Disconnetti</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </main>
+</body>
+</html>

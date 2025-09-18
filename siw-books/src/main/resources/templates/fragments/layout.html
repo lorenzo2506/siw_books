@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" th:fragment="base(title, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Biblioteca Storica - La casa della cultura e della conoscenza dal 1847">
+    <meta name="keywords" content="biblioteca, libri, autori, recensioni, cultura, letteratura">
+    <meta name="author" content="Biblioteca Storica">
+    
+    <title th:text="${title}">Wikibooks</title>
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    
+    <!-- Preload fonts per performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+</head>
+<body>
+    
+    <!-- Header Semplice -->
+    <header th:replace="fragments/header.html :: intestazione"></header>
+    
+    <!-- Main Content -->
+    <main id="main-content" th:replace="${content}" role="main">
+        <!-- Il contenuto della pagina verrà inserito qui -->
+    </main>
+    
+</body>
+</html>

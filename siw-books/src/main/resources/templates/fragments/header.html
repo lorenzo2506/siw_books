@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Header Fragment - Biblioteca Storica SEMPLICE -->
+    <header th:fragment="intestazione" class="biblioteca-header">
+        
+        <!-- Main header -->
+        <div class="main-header">
+            <div class="container">
+                <div class="header-content">
+                    
+                    <!-- Logo con icona ridimensionata -->
+                    <div th:if="${!isAuthenticated or isUser}" class="logo-section">
+                        <a th:href="@{/}" class="logo-link">
+                            <img th:src="@{/images/icons/pantheon-icon.png}" class="logo-icon">
+                            <div class="logo-text">
+                                <h1>Wikibooks</h1>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div th:if="${isAdmin}" class="logo-section">
+                        <a th:href="@{/admin}" class="logo-link">
+                            <img th:src="@{/images/icons/pantheon-icon.png}" class="logo-icon">
+                            <div class="logo-text">
+                                <h1>Wikibooks</h1>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Search -->
+                    <div class="search-section">
+                        <form th:action="@{/books/search}" method="GET" class="search-form">
+                            <div class="search-container">
+                                <input type="text" 
+                                       name="query" 
+                                       placeholder="Cerca libri, autori, ISBN..."
+                                       class="search-input">
+                                <button type="submit" class="search-btn">
+                                    🔍
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Menu (SENZA aggiungi libro/autore) -->
+        <nav class="main-nav">
+            <div class="container">
+                <div class="nav-menu">
+                    <a th:if="${isUser or !isAuthenticated}" th:href="@{/}" class="nav-link">
+                        <img th:src="@{/images/icons/home-icon.png}" class="nav-icon">
+                        <span>home</span>
+                    </a>
+                    <a th:if="${isAdmin}" th:href="@{/admin}" class="nav-link">
+                        <img th:src="@{/images/icons/home-icon.png}" class="nav-icon">
+                        <span>home</span>
+                    </a>
+                    <a th:href="@{/books}" class="nav-link">
+                        <img th:src="@{/images/icons/book-icon.webp}" class="nav-icon">
+                        <span>libri</span>
+                    </a>
+                    <a th:href="@{/authors}" class="nav-link">
+                        <img th:src="@{/images/icons/authors-icon.png}" class="nav-icon">
+                        <span>autori</span>
+                    </a>
+                    <a th:href="@{/profile}" class="nav-link">
+                        <img th:src="@{/images/icons/profile2-icon.png}" class="nav-icon">
+                        <span>profilo</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+    </header>
+</body>
+</html>

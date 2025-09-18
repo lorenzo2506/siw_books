@@ -34,6 +34,9 @@ public class Author {
 	
 	private LocalDate dateOfDeath;
 	
+    private String nationality; // NUOVO CAMPO
+
+	
 	// MODIFICA: Singola immagine per l'autore
 	private String imagePath;
 	

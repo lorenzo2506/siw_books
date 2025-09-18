@@ -1,0 +1,478 @@
+/* authors.css - Stili per le pagine degli autori */
+
+/* Lista autori */
+.authors-page {
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+.authors-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.authors-title {
+    font-family: var(--title-font);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.authors-subtitle {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.authors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.author-card {
+    background: white;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    transition: var(--transition);
+    border-left: 4px solid var(--accent-color);
+}
+
+.author-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.author-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.author-card-image {
+    height: 200px;
+    background: linear-gradient(135deg, var(--light-bg), #f0ede8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.author-photo-small {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.author-card:hover .author-photo-small {
+    transform: scale(1.05);
+}
+
+.author-placeholder {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--text-light);
+}
+
+.author-card-content {
+    padding: 20px;
+}
+
+.author-card-name {
+    font-family: var(--title-font);
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+    transition: var(--transition-fast);
+}
+
+.author-card:hover .author-card-name {
+    color: var(--accent-color);
+}
+
+.author-card-dates {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+}
+
+.birth-date, .death-date {
+    font-weight: 500;
+}
+
+.living-indicator {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.date-separator {
+    margin: 0 5px;
+}
+
+.author-card-books {
+    margin-top: 10px;
+}
+
+.books-count {
+    background: var(--accent-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: var(--body-font);
+}
+
+.no-books-text {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-style: italic;
+    font-family: var(--body-font);
+}
+
+.authors-navigation {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Pagina singolo autore */
+.author-detail-page {
+    padding: 40px 0;
+}
+
+.author-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.author-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: white;
+    border-radius: var(--border-radius-large);
+}
+
+.author-header h1 {
+    font-family: var(--title-font);
+    font-size: 2.8rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.author-content {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 40px;
+    margin-bottom: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Sezione immagine autore */
+.author-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.author-image-container {
+    width: 100%;
+    max-width: 280px;
+}
+
+.author-photo {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-heavy);
+    border: 3px solid var(--accent-color);
+}
+
+.no-image-elegant {
+    width: 100%;
+    max-width: 280px;
+    height: 350px;
+    background: linear-gradient(135deg, var(--light-bg), #f0ede8);
+    border: 3px dashed var(--text-light);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-family: var(--body-font);
+}
+
+.author-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+/* Informazioni autore */
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 10px 0;
+}
+
+.author-name-detail {
+    font-family: var(--title-font);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.2;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 15px;
+}
+
+.author-biography {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.bio-label {
+    font-family: var(--title-font);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.bio-value {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.author-status {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid #4caf50;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-icon {
+    font-size: 1.2rem;
+}
+
+.status-text {
+    font-family: var(--body-font);
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Sezione libri dell'autore */
+.author-books-section {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    margin-bottom: 30px;
+}
+
+.author-books-section h2 {
+    font-family: var(--title-font);
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+
+
+.books-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.book-link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--accent-color), #f57c00);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    transition: var(--transition);
+    box-shadow: var(--shadow-light);
+    min-width: 200px;
+}
+
+.book-link:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    color: white;
+    text-decoration: none;
+}
+
+.book-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.book-year {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.no-books {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    color: var(--text-light);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+.no-books p {
+    font-family: var(--body-font);
+    font-style: italic;
+}
+
+/* Azioni autore */
+.author-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: var(--shadow-light);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn-outline:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.btn-icon {
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .authors-title {
+        font-size: 2rem;
+    }
+    
+    .authors-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .author-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 20px;
+    }
+    
+    .author-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .author-name-detail {
+        font-size: 2rem;
+    }
+    
+    .author-photo {
+        height: 280px;
+    }
+    
+    .no-image-elegant {
+        height: 280px;
+    }
+    
+    .bio-item {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .books-list {
+        justify-content: center;
+    }
+    
+    .book-link {
+        min-width: auto;
+        text-align: center;
+    }
+    
+    .author-actions {
+        justify-content: center;
+    }
+}

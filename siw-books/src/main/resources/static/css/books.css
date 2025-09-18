@@ -1,0 +1,625 @@
+/* books.css - Stili per le pagine dei libri */
+
+/* Lista libri */
+.books-page {
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+.books-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.books-title {
+    font-family: var(--title-font);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.books-subtitle {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.book-card-simple {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    padding: 20px;
+    transition: var(--transition);
+    border-left: 4px solid var(--accent-color);
+}
+
+.book-card-simple:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.book-card-simple h3 {
+    font-family: var(--title-font);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.book-card-simple a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+}
+
+.book-card-simple a:hover {
+    color: var(--accent-color);
+}
+
+.book-meta {
+    margin-top: 10px;
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-light);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state h2 {
+    font-family: var(--title-font);
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+
+.back-to-menu {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-weight: 500;
+    transition: var(--transition);
+    margin-top: 30px;
+}
+
+.back-to-menu:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Pagina singolo libro - NUOVO DESIGN ELEGANTE */
+.book-detail-page {
+    padding: 40px 0;
+}
+
+.book-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.book-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: white;
+    border-radius: var(--border-radius-large);
+}
+
+.book-header h1 {
+    font-family: var(--title-font);
+    font-size: 2.8rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.book-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+}
+
+/* NUOVO: Carosello SOLO CSS senza JavaScript */
+.book-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-carousel {
+    width: 100%;
+    max-width: 350px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Input radio nascosti */
+.carousel-radio {
+    display: none;
+}
+
+.carousel-images {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-heavy);
+    border: 3px solid var(--accent-color);
+}
+
+.carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Mostra l'immagine quando il radio corrispondente è selezionato */
+.carousel-radio:nth-child(1):checked ~ .carousel-images .carousel-image[data-slide="0"],
+.carousel-radio:nth-child(2):checked ~ .carousel-images .carousel-image[data-slide="1"],
+.carousel-radio:nth-child(3):checked ~ .carousel-images .carousel-image[data-slide="2"],
+.carousel-radio:nth-child(4):checked ~ .carousel-images .carousel-image[data-slide="3"],
+.carousel-radio:nth-child(5):checked ~ .carousel-images .carousel-image[data-slide="4"] {
+    opacity: 1;
+}
+
+.carousel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Frecce di navigazione */
+.carousel-navigation {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.nav-arrows {
+    position: relative;
+    width: 100%;
+    height: 0;
+}
+
+.arrow {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: var(--transition);
+    pointer-events: auto;
+    user-select: none;
+    z-index: 10;
+}
+
+.arrow:hover {
+    background: rgba(0,0,0,0.9);
+    transform: scale(1.1);
+}
+
+.arrow-left {
+    left: 15px;
+}
+
+.arrow-right {
+    right: 15px;
+}
+
+/* Mostra le frecce solo per la slide attiva */
+.carousel-radio:nth-child(1):checked ~ .carousel-navigation .arrow[data-for-slide="0"],
+.carousel-radio:nth-child(2):checked ~ .carousel-navigation .arrow[data-for-slide="1"],
+.carousel-radio:nth-child(3):checked ~ .carousel-navigation .arrow[data-for-slide="2"],
+.carousel-radio:nth-child(4):checked ~ .carousel-navigation .arrow[data-for-slide="3"],
+.carousel-radio:nth-child(5):checked ~ .carousel-navigation .arrow[data-for-slide="4"] {
+    display: flex;
+}
+
+/* Contatore dinamico */
+.image-counter {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-family: var(--body-font);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.counter-display {
+    display: none;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Mostra il contatore corretto per la slide attiva */
+.carousel-radio:nth-child(1):checked ~ .carousel-navigation ~ .image-counter .counter-display[data-counter="0"],
+.carousel-radio:nth-child(2):checked ~ .carousel-navigation ~ .image-counter .counter-display[data-counter="1"],
+.carousel-radio:nth-child(3):checked ~ .carousel-navigation ~ .image-counter .counter-display[data-counter="2"],
+.carousel-radio:nth-child(4):checked ~ .carousel-navigation ~ .image-counter .counter-display[data-counter="3"],
+.carousel-radio:nth-child(5):checked ~ .carousel-navigation ~ .image-counter .counter-display[data-counter="4"] {
+    display: inline;
+}
+
+.no-image-elegant {
+    width: 100%;
+    max-width: 350px;
+    height: 400px;
+    background: linear-gradient(135deg, var(--light-bg), #f0ede8);
+    border: 3px dashed var(--text-light);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-family: var(--body-font);
+}
+
+.book-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+/* NUOVO: Info libro più eleganti */
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 10px 0;
+}
+
+.book-title-detail {
+    font-family: var(--title-font);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.2;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 15px;
+}
+
+/* NUOVO: Autori nella parte principale - STILI CORRETTI */
+.book-authors-main {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.authors-prefix {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.authors-list-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.author-link-main {
+    font-family: var(--title-font);
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.author-link-main:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.author-separator {
+    color: var(--text-light);
+    font-family: var(--body-font);
+    font-size: 1.2rem;
+    margin: 0 2px;
+}
+
+/* NUOVO: Anno più elegante */
+.book-year-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.year-label {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.year-value {
+    font-family: var(--title-font);
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.book-description {
+    padding: 20px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--accent-color);
+}
+
+.book-description p {
+    font-family: var(--body-font);
+    line-height: 1.6;
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.library-info {
+    padding: 20px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: var(--border-radius);
+    border-left: 4px solid #4caf50;
+}
+
+.availability-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-icon {
+    font-size: 1.2rem;
+    color: #4caf50;
+}
+
+.status-text {
+    font-family: var(--body-font);
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.book-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* Dettagli libro aggiuntivi */
+.book-detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.book-detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-family: var(--title-font);
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    font-family: var(--body-font);
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.authors-section {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    margin-bottom: 30px;
+}
+
+.authors-section h2 {
+    font-family: var(--title-font);
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+.authors-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--accent-color), #f57c00);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-family: var(--body-font);
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: var(--shadow-light);
+}
+
+.author-link:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    color: white;
+}
+
+.author-icon {
+    font-size: 1rem;
+}
+
+.no-authors {
+    color: var(--text-light);
+    font-family: var(--body-font);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background: var(--light-bg);
+    border-radius: var(--border-radius);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 25px;
+    background: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: var(--shadow-medium);
+}
+
+.back-link:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+    color: white;
+}
+
+.back-icon {
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .books-title {
+        font-size: 2rem;
+    }
+    
+    .books-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .book-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 20px;
+    }
+    
+    .book-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .book-title-detail {
+        font-size: 2rem;
+    }
+    
+    .carousel-images {
+        height: 320px;
+    }
+    
+    .image-carousel {
+        max-width: 280px;
+    }
+    
+    .no-image-elegant {
+        max-width: 280px;
+        height: 320px;
+    }
+    
+    .book-authors-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .book-year-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .book-actions {
+        justify-content: center;
+    }
+    
+    .authors-list {
+        justify-content: center;
+    }
+    
+    .book-detail-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

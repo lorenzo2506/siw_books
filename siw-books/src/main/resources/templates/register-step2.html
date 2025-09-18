@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Completa Registrazione - Biblioteca Storica</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+    <main>
+        <section class="auth-container">
+            <div class="auth-wrapper">
+                <div class="auth-card">
+                    
+                    <!-- Header con Progress Bar -->
+                    <div class="auth-header">
+                        <div class="auth-icon">
+                            📚
+                        </div>
+                        <h1 class="auth-title">
+                            <span th:text="${pageTitle ?: 'Completa Registrazione'}">Completa Registrazione</span>
+                        </h1>
+                        <p class="auth-subtitle" th:if="${welcomeMessage}">
+                            <span th:text="${welcomeMessage}">Benvenuto nella nostra biblioteca!</span>
+                        </p>
+                        
+                        <!-- Progress Bar -->
+                        <div class="progress-bar">
+                            <div class="step completed">
+                                <div class="step-circle">
+                                    <span class="step-check">✓</span>
+                                </div>
+                                <span class="step-label">Dati Personali</span>
+                            </div>
+                            <div class="step-connector completed"></div>
+                            <div class="step active">
+                                <div class="step-circle">
+                                    <span class="step-number">2</span>
+                                </div>
+                                <span class="step-label">Username</span>
+                            </div>
+                        </div>
+                        
+                        <p class="step-description">
+                            <span th:text="${instructions ?: 'Ultimo passaggio: scegli il tuo username univoco'}">
+                                Ultimo passaggio: scegli il tuo username univoco
+                            </span>
+                        </p>
+                    </div>
+                    
+                    <!-- Info Email Confermata -->
+                    <div class="info-box">
+                        <div class="info-content">
+                            <span class="info-icon">✅</span>
+                            <div class="info-details">
+                                <span class="info-label">Email confermata:</span>
+                                <span class="info-value" th:text="${credentials.email}">email@esempio.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Errore generico -->
+                    <div th:if="${errorMessage}" class="message-box error-message">
+                        <div class="message-icon">❌</div>
+                        <span th:text="${errorMessage}">Si è verificato un errore</span>
+                    </div>
+                    
+                    <!-- Form Step 2 -->
+                    <form th:action="@{/register/step2}" method="post" th:object="${credentials}" class="auth-form">
+                        
+                        <!-- Username -->
+                        <div class="form-group">
+                            <label for="username" class="form-label">
+                                <span class="label-icon">@</span>
+                                Username
+                            </label>
+                            <input type="text" 
+                                   th:field="*{username}" 
+                                   id="username" 
+                                   class="form-input" 
+                                   placeholder="es. marco_rossi"
+                                   required>
+                            
+                            <!-- Errore username esistente -->
+                            <div th:if="${usernameExists}" class="field-error">
+                                <span class="error-icon">⚠️</span>
+                                <span th:text="${usernameExists}">Questo username è già in uso</span>
+                            </div>
+                            
+                            <div class="form-hint">
+                                <span class="hint-icon">ℹ️</span>
+                                <span class="hint-text">
+                                    L'username deve essere univoco e può contenere lettere, numeri e underscore
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Azioni -->
+                        <div class="form-actions">
+                            <button type="submit" class="auth-submit-btn success">
+                                <span class="btn-icon">✓</span>
+                                <span class="btn-text">Completa Registrazione</span>
+                            </button>
+                            <a th:href="@{/register/cancel}" class="auth-cancel-btn">
+                                <span class="btn-icon">❌</span>
+                                <span class="btn-text">Annulla</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

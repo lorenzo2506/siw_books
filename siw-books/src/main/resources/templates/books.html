@@ -1,22 +1,54 @@
-<html xmlns:th="http://www.thymeleaf.org">
-	
-	<head>
-		<title>libri</title>
-	</head>
-		
-	<body>
-		<div th:if="${#lists.isEmpty(books)}">
-			<p>non ci sono libri nel sistema</p>
-		</div>
-		<div th:if="${!#lists.isEmpty(books)}">
-			<div th:each="book: ${books}">
-				<a th:href="@{'/book/' + ${book.id}}"> <span th:text="${book.title}"></span>
-				</a>
-			</div>
-		</div>
-		
-		<div>
-			<a th:href="@{/}">torna al menu</a>
-		</div>
-	</body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Catalogo Libri - Biblioteca Storica</title>
+</head>
+<body>
+    <main class="books-page">
+        <div class="container">
+            
+            <!-- Header della pagina -->
+            <div class="books-header">
+                <h1 class="books-title">📚 Catalogo Libri</h1>
+                <p class="books-subtitle">Esplora la nostra collezione di oltre 50.000 volumi</p>
+            </div>
+            
+            <!-- Stato vuoto - quando non ci sono libri -->
+            <div th:if="${#lists.isEmpty(books)}" class="empty-state">
+                <div class="empty-state-icon">📚</div>
+                <h2>Nessun libro trovato</h2>
+                <p>Non ci sono ancora libri nella biblioteca. Torna più tardi o contatta l'amministratore.</p>
+                <a th:href="@{/}" class="btn btn-primary">
+                    <span class="back-icon">🏠</span>
+                    Torna alla Home
+                </a>
+            </div>
+            
+            <!-- Griglia libri - quando ci sono libri -->
+            <div th:if="${!#lists.isEmpty(books)}">
+                <div class="books-grid">
+                    <div th:each="book : ${books}" class="book-card-simple">
+                        <a th:href="@{'/book/' + ${book.id}}">
+                            <h3 th:text="${book.title}">Titolo del Libro</h3>
+                            <div class="book-meta">
+                                <span th:if="${book.year}" class="book-year">
+                                    📅 <span th:text="${book.year}">2023</span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Link di ritorno quando ci sono libri -->
+                <div class="text-center">
+                    <a th:href="@{/}" class="back-to-menu">
+                        <span class="back-icon">🏠</span>
+                        Torna al Menu
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+</body>
 </html>

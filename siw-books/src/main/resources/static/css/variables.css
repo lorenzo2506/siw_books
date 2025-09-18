@@ -1,0 +1,32 @@
+/* variables.css - Variabili CSS per lo stile Biblioteca Vintage */
+
+:root {
+    /* Colori principali */
+    --primary-color: #5d4037;      /* Marrone scuro principale */
+    --secondary-color: #8d6e63;    /* Marrone medio */
+    --accent-color: #ff8f00;       /* Arancione/oro per accenti */
+    --text-color: #3e2723;         /* Testo scuro */
+    --text-light: #6d4c41;         /* Testo secondario */
+    --bg-color: #faf8f5;           /* Sfondo crema */
+    --white: #ffffff;
+    --light-bg: #f5f3f0;           /* Sfondo chiaro alternativo */
+    
+    /* Font */
+    --title-font: 'Spectral', serif;
+    --body-font: 'Inter', sans-serif;
+    
+    /* Dimensioni */
+    --container-max-width: 1200px;
+    --header-height: 70px;
+    --border-radius: 8px;
+    --border-radius-large: 12px;
+    
+    /* Ombre */
+    --shadow-light: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-medium: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-heavy: 0 8px 25px rgba(0,0,0,0.1);
+    
+    /* Transizioni */
+    --transition: all 0.3s ease;
+    --transition-fast: all 0.2s ease;
+}

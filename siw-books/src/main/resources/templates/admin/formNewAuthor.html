@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Aggiungi Autore - Biblioteca Storica</title>
+</head>
+<body>
+    <main class="form-page">
+        <div class="container">
+            <div class="form-container">
+                
+                <div class="form-header">
+                    <h1>Aggiungi Nuovo Autore</h1>
+                    <p>Inserisci le informazioni dell'autore da aggiungere alla collezione</p>
+                </div>
+                
+                <form th:action="@{/admin/authors/add}" method="post" enctype="multipart/form-data" th:object="${author}" class="elegant-form">
+                    
+                    <!-- Errori generali -->
+                    <div th:if="${#fields.hasGlobalErrors()}" class="error-section">
+                        <div class="error-icon">⚠️</div>
+                        <ul class="error-list">
+                            <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Informazioni personali -->
+                    <fieldset class="form-section">
+                        <legend>Informazioni Personali</legend>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nome *</label>
+                                <input type="text" th:field="*{name}" id="name" 
+                                       th:class="${#fields.hasErrors('name')} ? 'field-error' : ''" 
+                                       placeholder="Es. Alessandro" required />
+                                <div th:if="${#fields.hasErrors('name')}" class="field-error-message">
+                                    <span th:errors="*{name}"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="surname">Cognome *</label>
+                                <input type="text" th:field="*{surname}" id="surname" 
+                                       th:class="${#fields.hasErrors('surname')} ? 'field-error' : ''" 
+                                       placeholder="Es. Manzoni" required />
+                                <div th:if="${#fields.hasErrors('surname')}" class="field-error-message">
+                                    <span th:errors="*{surname}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateOfBirth">Data di nascita *</label>
+                                <input type="date" th:field="*{dateOfBirth}" id="dateOfBirth" 
+                                       th:class="${#fields.hasErrors('dateOfBirth')} ? 'field-error' : ''" required />
+                                <div th:if="${#fields.hasErrors('dateOfBirth')}" class="field-error-message">
+                                    <span th:errors="*{dateOfBirth}"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="nationality">Nazionalità</label>
+                                <select th:field="*{nationality}" id="nationality" 
+                                        th:class="${#fields.hasErrors('nationality')} ? 'field-error' : ''">
+                                    <option value="">Seleziona nazionalità</option>
+                                    <option value="Italiana">Italiana</option>
+                                    <option value="Americana">Americana</option>
+                                    <option value="Inglese">Inglese</option>
+                                    <option value="Francese">Francese</option>
+                                    <option value="Tedesca">Tedesca</option>
+                                    <option value="Spagnola">Spagnola</option>
+                                    <option value="Russa">Russa</option>
+                                    <option value="Giapponese">Giapponese</option>
+                                    <option value="Cinese">Cinese</option>
+                                    <option value="Brasiliana">Brasiliana</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Messicana">Messicana</option>
+                                    <option value="Canadese">Canadese</option>
+                                    <option value="Australiana">Australiana</option>
+                                    <option value="Olandese">Olandese</option>
+                                    <option value="Belga">Belga</option>
+                                    <option value="Svizzera">Svizzera</option>
+                                    <option value="Austriaca">Austriaca</option>
+                                    <option value="Portoghese">Portoghese</option>
+                                    <option value="Greca">Greca</option>
+                                    <option value="Turca">Turca</option>
+                                    <option value="Polacca">Polacca</option>
+                                    <option value="Ceca">Ceca</option>
+                                    <option value="Ungherese">Ungherese</option>
+                                    <option value="Svedese">Svedese</option>
+                                    <option value="Norvegese">Norvegese</option>
+                                    <option value="Danese">Danese</option>
+                                    <option value="Finlandese">Finlandese</option>
+                                    <option value="Islandese">Islandese</option>
+                                    <option value="Irlandese">Irlandese</option>
+                                    <option value="Scozzese">Scozzese</option>
+                                    <option value="Gallese">Gallese</option>
+                                    <option value="Sud Africana">Sud Africana</option>
+                                    <option value="Egiziana">Egiziana</option>
+                                    <option value="Israeliana">Israeliana</option>
+                                    <option value="Indiana">Indiana</option>
+                                    <option value="Coreana">Coreana</option>
+                                    <option value="Tailandese">Tailandese</option>
+                                    <option value="Vietnamita">Vietnamita</option>
+                                    <option value="Cilena">Cilena</option>
+                                    <option value="Colombiana">Colombiana</option>
+                                    <option value="Peruviana">Peruviana</option>
+                                    <option value="Venezuelana">Venezuelana</option>
+                                    <option value="Nigeriana">Nigeriana</option>
+                                    <option value="Keniota">Keniota</option>
+                                    <option value="Marocchina">Marocchina</option>
+                                    <option value="Algerina">Algerina</option>
+                                    <option value="Tunisina">Tunisina</option>
+                                    <option value="Albanese">Albanese</option>
+                                    <option value="Bulgara">Bulgara</option>
+                                    <option value="Croata">Croata</option>
+                                    <option value="Serba">Serba</option>
+                                    <option value="Bosniaca">Bosniaca</option>
+                                    <option value="Slovena">Slovena</option>
+                                    <option value="Slovacca">Slovacca</option>
+                                    <option value="Rumena">Rumena</option>
+                                    <option value="Moldava">Moldava</option>
+                                    <option value="Ucraina">Ucraina</option>
+                                    <option value="Bielorussa">Bielorussa</option>
+                                    <option value="Lituana">Lituana</option>
+                                    <option value="Lettone">Lettone</option>
+                                    <option value="Estone">Estone</option>
+                                    <option value="Altra">Altra</option>
+                                </select>
+                                <div th:if="${#fields.hasErrors('nationality')}" class="field-error-message">
+                                    <span th:errors="*{nationality}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <!-- Immagine dell'autore -->
+                    <fieldset class="form-section">
+                        <legend>Immagine Autore (Opzionale)</legend>
+                        <div class="image-upload-section">
+                            <div class="upload-area">
+                                <div class="upload-icon">📷</div>
+                                <label for="imageFile" class="upload-label">Clicca per selezionare un'immagine</label>
+                                <input type="file" 
+                                       name="imageFile" 
+                                       id="imageFile" 
+                                       accept="image/*" 
+                                       class="file-input" />
+                                <div class="upload-info">
+                                    <small>Formati supportati: JPG, PNG, GIF, WebP</small>
+                                    <small>Dimensione massima: 5MB</small>
+                                </div>
+                            </div>
+                            
+                            <div class="upload-note">
+                                <p><strong>Nota:</strong> L'immagine aiuterà i lettori a riconoscere l'autore, ma non è obbligatoria.</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <!-- Azioni -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-icon">✓</span>
+                            Aggiungi Autore
+                        </button>
+                        <a th:href="@{/authors}" class="btn btn-secondary">
+                            <span class="btn-icon">✕</span>
+                            Annulla
+                        </a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </main>
+</body>
+</html>

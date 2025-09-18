@@ -1,0 +1,32 @@
+/* main.css - File principale che importa tutti gli altri CSS */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Import dei file CSS specifici */
+@import url('base.css');
+@import url('homepage.css');
+@import url('variables.css');
+@import url('header.css');
+@import url('components.css');
+@import url('books.css');
+@import url('authors.css');
+@import url('forms.css');
+@import url('userProfile.css');
+@import url('auth.css');
+
+
+
+/* Reset base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::title}, ~{::main})}">
+<head>
+    <title>Registrazione - Biblioteca Storica</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+    <main>
+        <section class="auth-container">
+            <div class="auth-wrapper">
+                <div class="auth-card">
+                    
+                    <!-- Header con Progress Bar -->
+                    <div class="auth-header">
+                        <div class="auth-icon">
+                            📚
+                        </div>
+                        <h1 class="auth-title">
+                            Registrazione Biblioteca
+                        </h1>
+                        <p class="auth-subtitle">
+                            Unisciti alla nostra comunità di lettori
+                        </p>
+                        
+                        <!-- Progress Bar -->
+                        <div class="progress-bar">
+                            <div class="step active">
+                                <div class="step-circle">
+                                    <span class="step-number">1</span>
+                                </div>
+                                <span class="step-label">Dati Personali</span>
+                            </div>
+                            <div class="step-connector"></div>
+                            <div class="step">
+                                <div class="step-circle">
+                                    <span class="step-number">2</span>
+                                </div>
+                                <span class="step-label">Username</span>
+                            </div>
+                        </div>
+                        
+                        <p class="step-description">
+                            Inserisci i tuoi dati personali e crea una password sicura
+                        </p>
+                    </div>
+                    
+                    <!-- Form Step 1 -->
+                    <form th:action="@{/register/step1}" method="post" th:object="${credentials}" class="auth-form">
+                        
+                        <!-- Nome -->
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                <span class="label-icon">👤</span>
+                                Nome
+                            </label>
+                            <input type="text" 
+                                   th:field="*{user.name}" 
+                                   id="name" 
+                                   class="form-input"
+                                   placeholder="Il tuo nome"
+                                   required>
+                        </div>
+
+                        <!-- Cognome -->
+                        <div class="form-group">
+                            <label for="surname" class="form-label">
+                                <span class="label-icon">👤</span>
+                                Cognome
+                            </label>
+                            <input type="text" 
+                                   th:field="*{user.surname}" 
+                                   id="surname" 
+                                   class="form-input"
+                                   placeholder="Il tuo cognome"
+                                   required>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                <span class="label-icon">📧</span>
+                                Email
+                            </label>
+                            <input type="email" 
+                                   th:field="*{email}" 
+                                   id="email" 
+                                   class="form-input"
+                                   placeholder="la.tua.email@esempio.com"
+                                   required>
+                            
+                            <!-- Errore email esistente -->
+                            <div th:if="${emailExists}" class="field-error">
+                                <span class="error-icon">⚠️</span>
+                                <span th:text="${emailExists}">Questa email è già registrata</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                <span class="label-icon">🔒</span>
+                                Password
+                            </label>
+                            <input type="password" 
+                                   th:field="*{password}" 
+                                   id="password" 
+                                   class="form-input"
+                                   placeholder="Crea una password sicura"
+                                   required>
+                            <div class="form-hint">
+                                <span class="hint-icon">ℹ️</span>
+                                <span class="hint-text">La password deve contenere almeno 8 caratteri</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Azioni -->
+                        <div class="form-actions">
+                            <button type="submit" class="auth-submit-btn primary">
+                                <span class="btn-icon">➡️</span>
+                                <span class="btn-text">Continua</span>
+                            </button>
+                            <a th:href="@{/login}" class="auth-cancel-btn">
+                                <span class="btn-icon">❌</span>
+                                <span class="btn-text">Annulla</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
